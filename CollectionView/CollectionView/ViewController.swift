@@ -1,19 +1,39 @@
-//
-//  ViewController.swift
-//  CollectionView
-//
-//  Created by 하동건 on 7/3/25.
-//
-
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: BaseViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
+        $0.itemSize = CGSize(width: 100, height: 130)
+        $0.minimumLineSpacing = 10
+        $0.minimumInteritemSpacing = 10
+        $0.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    })
+    
+       override func addSubview() {
+           collectionView.register(MyCell.self, forCellWithReuseIdentifier: MyCell.identifier)
+       }
+       
+       override func layout() {
+           collectionView.snp.makeConstraints {
+               $0.edges.equalToSuperview()
+           }
+       }
+}
+
+extension ViewController: UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 70 // 원하는 셀 개수
     }
-
-
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCell.identifier, for: indexPath) as? MyCell else {
+            return UICollectionViewCell()
+        }
+        let image = UIImage(named: "sample")
+        let title = "아이템 \(indexPath.item + 1)"
+        cell.configure(image: image, title: title)
+        
+        return cell
+    }
 }
 
