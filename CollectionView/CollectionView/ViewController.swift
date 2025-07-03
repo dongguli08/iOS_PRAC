@@ -17,7 +17,7 @@ class ViewController: BaseViewController {
        
        override func layout() {
            collectionView.snp.makeConstraints {
-               $0.edges.equalToSuperview() //collectionView는 ViewController의 view 전체를 가득 채
+               $0.edges.equalToSuperview() //collectionView는 ViewController의 view 전체를 가득 채움
            }
        }
 }
