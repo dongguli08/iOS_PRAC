@@ -10,12 +10,14 @@ class ViewController: BaseViewController {
     })
     
        override func addSubview() {
+           view.addSubview(collectionView)  // 직접 호출해야 뷰가 추가됨
+           collectionView.dataSource = self
            collectionView.register(MyCell.self, forCellWithReuseIdentifier: MyCell.identifier)
        }
        
        override func layout() {
            collectionView.snp.makeConstraints {
-               $0.edges.equalToSuperview()
+               $0.edges.equalToSuperview() //collectionView는 ViewController의 view 전체를 가득 채
            }
        }
 }
