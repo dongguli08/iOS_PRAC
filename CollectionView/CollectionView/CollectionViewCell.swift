@@ -27,7 +27,7 @@ class MyCell: UICollectionViewCell {
             $0.height.equalTo(contentView.snp.width) // 정사각형 이미지뷰
         }
         
-        titleLabel.snp.makeConstraints {
+        titleLabel.snp.makeConstraints { //cell 내부의 조건
             $0.top.equalTo(imageView.snp.bottom).offset(4)
             $0.leading.trailing.equalToSuperview().inset(4)
             $0.bottom.lessThanOrEqualToSuperview().inset(4)
@@ -38,7 +38,7 @@ class MyCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(image: UIImage?, title: String) {
+    func configure(image: UIImage?, title: String) { //셀의 UI 요소인 imageView와 titleLabel에 데이터를 넣어주는 역할을 합니다
         imageView.image = image
         titleLabel.text = title
     }

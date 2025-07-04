@@ -3,16 +3,16 @@ import UIKit
 class ViewController: BaseViewController {
 
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then {
-        $0.itemSize = CGSize(width: 100, height: 130)
-        $0.minimumLineSpacing = 10
-        $0.minimumInteritemSpacing = 10
-        $0.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        $0.itemSize = CGSize(width: 100, height: 130) //셀 하나의 크기
+        $0.minimumLineSpacing = 10 //행 간 간격
+        $0.minimumInteritemSpacing = 10 //셀 사이 간격
+        $0.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) //섹션 안쪽 여백
     })
     
-       override func addSubview() {
+    override func addSubview() {
            view.addSubview(collectionView)  // 직접 호출해야 뷰가 추가됨
            collectionView.dataSource = self
-           collectionView.register(MyCell.self, forCellWithReuseIdentifier: MyCell.identifier)
+           collectionView.register(MyCell.self, forCellWithReuseIdentifier: MyCell.identifier)//셀등록
        }
        
        override func layout() {
