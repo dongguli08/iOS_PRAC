@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController ,UITextFieldDelegate {
+class ViewController:BaseViewController,UITextFieldDelegate { //BaseViewController 상속
     
     private let textField: UITextField = {
         let textField = UITextField()
@@ -18,12 +18,16 @@ class ViewController: UIViewController ,UITextFieldDelegate {
         return label
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    
+    override func addSubView(){
         view.addSubview(textField)
         view.addSubview(checkLabel)
         
+        textField.addTarget(self, action: #selector(chechText), for: .editingChanged)
+        textField.delegate = self
+    }
+    
+    override func layOut() {
         // SnapKit constraints 설정
         textField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(100)
@@ -38,9 +42,6 @@ class ViewController: UIViewController ,UITextFieldDelegate {
             $0.height.equalTo(50)
         }
 
-        // 실시간 텍스트 검사 이벤트 등록
-        textField.addTarget(self, action: #selector(chechText), for: .editingChanged)
-        textField.delegate = self
     }
     
     // 델리게이트 메서드: 입력 제한
