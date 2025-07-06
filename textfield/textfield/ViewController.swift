@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController ,UITextFieldDelegate {
     
     private let textField: UITextField = {
         let textField = UITextField()
@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.backgroundColor = .gray
         label.textColor = .black
-        label.text = "5글자를 넘지 않았습니다."
+        label.text = "8글자를 넘지 않았습니다."
         return label
     }()
     
@@ -40,17 +40,26 @@ class ViewController: UIViewController {
 
         // 실시간 텍스트 검사 이벤트 등록
         textField.addTarget(self, action: #selector(chechText), for: .editingChanged)
+        textField.delegate = self
     }
     
+    // 델리게이트 메서드: 입력 제한
+      func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+          let currentText = textField.text ?? ""
+          guard let stringRange = Range(range, in: currentText) else { return false }
+          let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+          return updatedText.count <= 8
+      }
+    
     @objc private func chechText() {
-        if (textField.text?.count ?? 0 < 5) {
+        if (textField.text?.count ?? 0 < 8) {
             checkLabel.backgroundColor = .gray
             checkLabel.textColor = .black
-            checkLabel.text = "5글자를 넘지 않았습니다."
+            checkLabel.text = "8글자를 넘지 않았습니다."
         } else {
             checkLabel.backgroundColor = .red
             checkLabel.textColor = .white
-            checkLabel.text = "5글자를 넘었습니다!"
+            checkLabel.text = "8글자를 넘었습니다!"
         }
     }
 }
