@@ -27,6 +27,19 @@ class ViewController:BaseViewController,UITextFieldDelegate { //BaseViewControll
         textField.delegate = self
     }
     
+    // 배경 클릭시 키보드 내림
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        textField.layer.borderWidth = 0 //테두리 사라짐
+        textField.layer.borderColor = UIColor.clear.cgColor // 테두리 색도 투명하게
+    }
+
+    // 입력 시작시 호출됨 (becomeFirstResponder 호출은 불필요)
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderWidth = 2
+        textField.layer.borderColor = UIColor.red.cgColor
+    }
+    
     override func layOut() {
         // SnapKit constraints 설정
         textField.snp.makeConstraints {
@@ -35,9 +48,8 @@ class ViewController:BaseViewController,UITextFieldDelegate { //BaseViewControll
             $0.right.equalToSuperview().inset(30)
             $0.height.equalTo(50)
         }
-
         checkLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(300)
+            $0.top.equalTo(textField.snp.bottom).offset(20)
             $0.left.right.equalTo(textField)
             $0.height.equalTo(50)
         }
