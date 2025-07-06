@@ -14,10 +14,10 @@ class ViewController: UIViewController {
           aButton.translatesAutoresizingMaskIntoConstraints = false
           aButton.layer.cornerRadius = 15 //둥근 모서리 설정
         
-          aButton.layer.shadowColor = UIColor.gray.cgColor //그림자 설정
-          aButton.layer.shadowOpacity = 1.0
-          aButton.layer.shadowOffset = CGSize.zero
-          aButton.layer.shadowRadius = 6
+          aButton.layer.shadowColor = UIColor.gray.cgColor //그림자색갈은 회식
+          aButton.layer.shadowOpacity = 1.0 // "그림자를 완전히 진하게 보이도록 설정한다."
+          aButton.layer.shadowOffset = CGSize.zero// "그림자가 버튼 뒤쪽에 정확히 겹치게 위치한다."
+          aButton.layer.shadowRadius = 6//6 정도의 퍼짐 효과를 줘서 부드러운 그림자를 만든다
         return aButton
     }()
 
