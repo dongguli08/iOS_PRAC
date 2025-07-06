@@ -2,6 +2,7 @@ import UIKit
 import SnapKit
 
 class ViewController:BaseViewController,UITextFieldDelegate { //BaseViewController 상속
+    // 여기서 touchesBegan(_:with:) 등 UIResponder의 메서드를 오버라이드해서 사용할 수 있습니다.
     
     private let textField: UITextField = {
         let textField = UITextField()
@@ -28,20 +29,19 @@ class ViewController:BaseViewController,UITextFieldDelegate { //BaseViewControll
     }
     
     // 배경 클릭시 키보드 내림
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { //상속받은 UIResponder 클래스에서 제공하는 메서드입니다.
         self.view.endEditing(true)
         textField.layer.borderWidth = 0 //테두리 사라짐
         textField.layer.borderColor = UIColor.clear.cgColor // 테두리 색도 투명하게
     }
 
     // 입력 시작시 호출됨 (becomeFirstResponder 호출은 불필요)
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderWidth = 2
+    func textFieldDidBeginEditing(_ textField: UITextField) { //UITextFieldDelegate 프로토콜에 정의된 델리게이트 메서드
+        textField.layer.borderWidth = 2 //없으면 색갈 안보임
         textField.layer.borderColor = UIColor.red.cgColor
     }
     
     override func layOut() {
-        // SnapKit constraints 설정
         textField.snp.makeConstraints {
             $0.top.equalToSuperview().offset(100)
             $0.left.equalToSuperview().offset(30)
