@@ -7,7 +7,7 @@ class ViewController: UIViewController {
     
     let roundShadowButton : UIButton = {
           let aButton = UIButton()
-          //4fc775
+        
           aButton.backgroundColor = UIColor(red: 0x4f/0xff, green: 0xc7/0xff, blue: 0x75/0xff, alpha: 1.0)
           aButton.setTitle("둥근 버튼", for: .normal)
           aButton.setTitleColor(.white, for: .normal)
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
           aButton.layer.shadowRadius = 6//6 정도의 퍼짐 효과를 줘서 부드러운 그림자를 만든다
         return aButton
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -28,18 +28,6 @@ class ViewController:BaseViewController,UITextFieldDelegate { //BaseViewControll
         textField.delegate = self
     }
     
-    // 배경 클릭시 키보드 내림
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { //상속받은 UIResponder 클래스에서 제공하는 메서드입니다.
-        self.view.endEditing(true)
-        textField.layer.borderWidth = 0 //테두리 사라짐
-        textField.layer.borderColor = UIColor.clear.cgColor // 테두리 색도 투명하게
-    }
-
-    // 입력 시작시 호출됨 (becomeFirstResponder 호출은 불필요)
-    func textFieldDidBeginEditing(_ textField: UITextField) { //UITextFieldDelegate 프로토콜에 정의된 델리게이트 메서드
-        textField.layer.borderWidth = 2 //없으면 색갈 안보임
-        textField.layer.borderColor = UIColor.red.cgColor
-    }
     
     override func layOut() {
         textField.snp.makeConstraints {
@@ -54,6 +42,19 @@ class ViewController:BaseViewController,UITextFieldDelegate { //BaseViewControll
             $0.height.equalTo(50)
         }
 
+    }
+
+    // 배경 클릭시 키보드 내림
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) { //상속받은 UIResponder 클래스에서 제공하는 메서드입니다.
+        self.view.endEditing(true)
+        textField.layer.borderWidth = 0 //테두리 사라짐
+        textField.layer.borderColor = UIColor.clear.cgColor // 테두리 색도 투명하게
+    }
+
+    // 입력 시작시 호출됨 (becomeFirstResponder 호출은 불필요)
+    func textFieldDidBeginEditing(_ textField: UITextField) { //UITextFieldDelegate 프로토콜에 정의된 델리게이트 메서드(편집상태가 되었을떄)
+        textField.layer.borderWidth = 2 //없으면 색갈 안보임
+        textField.layer.borderColor = UIColor.red.cgColor
     }
     
     // 델리게이트 메서드: 입력 제한
